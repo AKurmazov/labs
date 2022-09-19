@@ -2,6 +2,12 @@ CODE := server
 
 run := python -m poetry run
 
+# Tests
+
+.PHONY: test
+test:
+	PYTHONPATH=./ $(run) pytest --cov --verbosity=2 --showlocals --strict-markers
+
 # Linters
 
 .PHONY: isort

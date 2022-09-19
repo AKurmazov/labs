@@ -1,4 +1,4 @@
-## Overview
+## Overview ![App Python CI](https://github.com/AKurmazov/labs/actions/workflows/app_python.yml/badge.svg)
 A simple FastAPI/Uvicorn app that shows current time. Default timezone is *Europe/Moscow*
 
 ## Build
@@ -66,7 +66,7 @@ Via `docker run`
 ```bash
 $ docker run akurmazov/server:latest make lint
 ```
-
+ 
 #### Markdown
 I used the built-in PyCharm Markdown linter
 
@@ -74,6 +74,29 @@ I used the built-in PyCharm Markdown linter
 I used the `hadolint/hadolint` linter (more on it in **DOCKER.md**)
 
 You can run it via `hadolint docker/server/Dockerfile` being in the `app_python` directory (assuming it is installed)
+
+## Testing
+Furthermore, you can run unit tests, and check the coverage of the project
+
+Via `docker-compose run`
+```bash
+$ docker-compose run server make test
+```
+
+Via `docker run`
+```bash
+$ docker run akurmazov/server:latest make test
+```
+
+## GitHub Actions CI
+
+The GitHub Actions configuration used in this project has three jobs: Snyk, Build, and Publish
+
+* Snyk — checks the dependencies for vulnerabilities
+* Build — installs the dependencies, lints and tests the code
+* Publish — builds an image and tags it :latest, pushes the image to the docker hub
+
+The workflow is triggered only on changes in the ./app_python directory or in the workflow configuration itself
 
 ## Contacts
 
